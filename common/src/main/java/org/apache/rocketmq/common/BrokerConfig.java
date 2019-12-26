@@ -38,6 +38,9 @@ public class BrokerConfig {
     private String brokerName = localHostName();
     @ImportantField
     private String brokerClusterName = "DefaultCluster";
+    /**
+     * brokerld,O:Master：，大于0: Slave 。
+     */
     @ImportantField
     private long brokerId = MixAll.MASTER_ID;
     private int brokerPermission = PermName.PERM_READ | PermName.PERM_WRITE;

@@ -134,6 +134,10 @@ public class FilterServerManager {
         }
     }
 
+    /**
+     * 消息过滤服务器列表。
+     * @return
+     */
     public List<String> buildNewFilterServerList() {
         List<String> addr = new ArrayList<>();
         Iterator<Entry<Channel, FilterServerInfo>> it = this.filterServerTable.entrySet().iterator();

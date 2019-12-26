@@ -921,6 +921,14 @@ public class BrokerController {
 
         ConcurrentMap<String, TopicConfig> topicConfigTable = new ConcurrentHashMap<String, TopicConfig>();
         topicConfigTable.put(topicConfig.getTopicName(), registerTopicConfig);
+        /**
+         * 主题配置， topicConfigWrapper 内部封装的是TopicConfigManager
+         * 中的topicConfigTable ，内部存储的是Broker 启动时默认的一些Topic,
+         * MixAll. SELF TEST_ TOPIC 、MixAll.DEFAULT一TOPIC ( AutoCreateTopicEnable=
+         * true )., MixAll.BENCHMARK TOPIC 、MixAll.OFFSET MOVED
+         * EVENT 、BrokerConfig#brokerClusterName 、BrokerConfig#brokerName 。Broker
+         * 中Topic 默认存储在$｛ Rocket_Home｝ ／store/config/topic.json 中。
+         */
         TopicConfigSerializeWrapper topicConfigSerializeWrapper = new TopicConfigSerializeWrapper();
         topicConfigSerializeWrapper.setDataVersion(dataVersion);
         topicConfigSerializeWrapper.setTopicConfigTable(topicConfigTable);
@@ -929,6 +937,14 @@ public class BrokerController {
     }
 
     public synchronized void registerBrokerAll(final boolean checkOrderConfig, boolean oneway, boolean forceRegister) {
+        /**
+         * 主题配置， topicConfigWrapper 内部封装的是TopicConfigManager
+         * 中的topicConfigTable ，内部存储的是Broker 启动时默认的一些Topic,
+         * MixAll. SELF TEST_ TOPIC 、MixAll.DEFAULT一TOPIC ( AutoCreateTopicEnable=
+         * true )., MixAll.BENCHMARK TOPIC 、MixAll.OFFSET MOVED
+         * EVENT 、BrokerConfig#brokerClusterName 、BrokerConfig#brokerName 。Broker
+         * 中Topic 默认存储在$｛ Rocket_Home｝ ／store/config/topic.json 中。
+         */
         TopicConfigSerializeWrapper topicConfigWrapper = this.getTopicConfigManager().buildTopicConfigSerializeWrapper();
 
         if (!PermName.isWriteable(this.getBrokerConfig().getBrokerPermission())
@@ -1008,6 +1024,10 @@ public class BrokerController {
         this.topicConfigManager = topicConfigManager;
     }
 
+    /**
+     * master 地址，初次请求时该值为空， slave 向Nameserver 注册后返回
+     * @return
+     */
     public String getHAServerAddr() {
         return this.brokerConfig.getBrokerIP2() + ":" + this.messageStoreConfig.getHaListenPort();
     }

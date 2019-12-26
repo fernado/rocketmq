@@ -48,7 +48,7 @@ public class Consumer {
          * }
          * </pre>
          */
-
+        consumer.setNamesrvAddr("10.3.2.168:9876");
         /*
          * Specify where to start in case the specified consumer group is a brand new one.
          */
